@@ -5,10 +5,11 @@ import pytest
 
 
 @pytest.fixture
-def record_model_dict():
+def api_response_dict():
+    """ Fixture that exposes data that can be used to create a Record database object """
     return {
         'id': uuid.uuid4(),
         'title': 'xyz',
-        'description': 'test description',
-        'citation_reference': 'this is a citation'
+        'scopeContent': {'description': 'test description'},
+        'citableReference': 'this is a citation'
     }
