@@ -21,7 +21,6 @@ def test_get_records_from_NA_api(mock_get, api_response_dict):
 
 @patch("records.management.commands.get_record_data.requests.get")
 def test_api_call_with_invalid_id_raises_command_error(mock_get):
-    # Configure the mock to return a response with an OK status code.
     mock_get.return_value = Mock()
     mock_get.return_value.status_code = 204
 
