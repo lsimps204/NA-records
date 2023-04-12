@@ -11,7 +11,7 @@
         {% endblock %}
     </title>
 
-
+    <script src="https://cdn.tailwindcss.com"></script>
     {% block head %}
 
     {% endblock %}
@@ -19,15 +19,10 @@
 
 <body>
 
-    {% include 'core/navbar.html' %}
-
     <div class="container mt-4">
         {% block content %}
         {% endblock %}
     </div>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 
 </body>
 </html>

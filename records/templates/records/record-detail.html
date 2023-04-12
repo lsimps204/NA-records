@@ -4,6 +4,30 @@
     National Archive - Record Detail
 {% endblock %}
 
+
 {% block content %}
+
+<div class="m-6 flex items-center">
+
+    <h2 class="mb-2 mt-0 text-4xl font-medium leading-tight text-primary">
+
+        {% if record %}
+
+            {% if record.title %}
+                Title: {{ record.title }}
+            {% elif record.description %}
+                Description: {{ record.description }}
+            {% elif record.citable_reference %}
+                Citable Reference: {{ record.citable_reference }}
+            {% else %}
+                Not sufficient information.
+            {% endif %}
+        
+        {% else %}
+            No record found.
+        {% endif %}
+    </h2>
+
+</div>
 
 {% endblock %}

@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand, CommandError
 import requests
 
 from records.models import Record
+from records import response_utils
 
 
 
@@ -16,12 +17,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         record_id = options["record_id"]
         record_data = self.call_api(record_id)
-        model_data = {
-            "id": record_data.get("id"),
-            "title": record_data.get("title"),
-            "citable_reference": record_data.get("citableReference"),
-            "description": record_data.get("scopeContent", {}).get("description"),
-        }
+        model_data = response_utils.map_json_data_to_modelfields(record_data)
 
         # Store data in the database if it doesn't already exist
         record, created = Record.objects.get_or_create(**model_data)
