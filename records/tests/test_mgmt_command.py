@@ -10,7 +10,9 @@ RECORD_ID = "a147aa58-38c5-45fb-a340-4a348efa01e6"
 
 @patch("records.management.commands.get_record_data.requests.get")
 def test_get_records_from_NA_api(mock_get, api_response_dict):
-    # Configure the mock to return a response with an OK status code.
+    """ This test ensures an expected JSON response is returned from the management command's
+        'call_api()' method.
+     """
     mock_get.return_value = Mock()
     mock_get.return_value.status_code = 200
     mock_get.return_value.json.return_value = api_response_dict
@@ -21,6 +23,7 @@ def test_get_records_from_NA_api(mock_get, api_response_dict):
 
 @patch("records.management.commands.get_record_data.requests.get")
 def test_api_call_with_invalid_id_raises_command_error(mock_get):
+    """ This test ensures a CommandError is raised when an invalid ID is provided to the management command. """
     mock_get.return_value = Mock()
     mock_get.return_value.status_code = 204
 
@@ -32,6 +35,7 @@ def test_api_call_with_invalid_id_raises_command_error(mock_get):
 @pytest.mark.django_db
 @patch("records.management.commands.get_record_data.Command.call_api")
 def test_api_call_creates_model_object(mock_response, api_response_dict):
+    """ This test ensures the management command created a Record object when called w/ a valid ID. """
     mock_response.return_value = api_response_dict
     
     # call the management command and assert that the API data is added to the DB
